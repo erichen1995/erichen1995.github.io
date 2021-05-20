@@ -18,7 +18,7 @@
   <meta name="author" content="erichen">
   <meta name="keywords" content="">
   
-  <title>使用chrome开发工具测试sequlize语句 - koushixinfei&#39;bolog</title>
+  <title>redux学习 - koushixinfei&#39;bolog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -165,7 +165,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="使用chrome开发工具测试sequlize语句">
+            <span class="h2" id="subtitle" title="redux学习">
               
             </span>
 
@@ -175,8 +175,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-05-08 20:28" pubdate>
-        2021年5月8日 晚上
+      <time datetime="2021-05-13 21:39" pubdate>
+        2021年5月13日 晚上
       </time>
     </span>
   
@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      145 字
+      381 字
     </span>
   
 
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      5
        分钟
     </span>
   
@@ -227,23 +227,40 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">使用chrome开发工具测试sequlize语句</h1>
+            <h1 style="display: none">redux学习</h1>
             
             <div class="markdown-body">
-              <p>在使用sequelize的时候,经常需要测试sequelize语句的效果,但是在命令行中没有在chrome开发工具中方便.</p>
-<p>具体步骤如下:</p>
-<ol>
-<li><p>进入工作文件夹(就是db.js所在的文件夹)</p>
+              <h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><h3 id="什么是Redux"><a href="#什么是Redux" class="headerlink" title="什么是Redux"></a>什么是Redux</h3><p><code>Redux</code>是Js状态容器</p>
+<h3 id="什么是React绑定库"><a href="#什么是React绑定库" class="headerlink" title="什么是React绑定库"></a>什么是React绑定库</h3><p><code>Redux</code>是js状态容器,如果要在React中使用还需要安装<code>react-redux</code>,这个就是绑定库</p>
+<h2 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h2><ul>
+<li><p>应用中所有的<code>state</code>的以一个<strong>对象树</strong>的形式储存在一个单一的<code>store</code>中.</p>
 </li>
-<li><p>打开命令行输入<code>node --inspect-brk</code>,需要已经安装<strong>nodejs</strong></p>
+<li><p>唯一改变<code>state</code>的办法是触发<code>action</code>,一个描述发生什么的对象</p>
 </li>
-<li><p>点击chrome的开发者工具上面有个node的标志,打开node调试工具.</p>
-<p><img src="/2021/05/08/%E4%BD%BF%E7%94%A8chrome%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E6%B5%8B%E8%AF%95sequlize%E8%AF%AD%E5%8F%A5/image-20210508204249749.png" srcset="/img/loading.gif" lazyload alt="image-20210508204249749"></p>
+<li><p>为了描述<code>action</code>如何改变state树,还需要<code>reduer</code></p>
 </li>
-<li><p>在命令行中输入<code>.load ./db.js</code>,”db.js”是你的数据库定义的文件.</p>
+</ul>
+<h2 id="三大原则"><a href="#三大原则" class="headerlink" title="三大原则"></a>三大原则</h2><ol>
+<li><p>所有state存在于一个对象树里,对象树存在于一个store中</p>
+</li>
+<li><p>state是只读的</p>
+</li>
+<li><p>使用纯函数来执行修改</p>
 </li>
 </ol>
-<p>至此,就能够在开发工具中使用sequelize语句操作数据库了.</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>在react中使用还需要react-redux绑定库.</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">npm install react-redux<br></code></pre></td></tr></tbody></table></figure>
+
+<p>安装redux</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js">npm install redux<br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><p>创建store.js用来存放store,在store中,引入redux</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> { createStore, combineReducers, applyMiddleware, compose } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span><br><span class="hljs-keyword">import</span> createSagaMiddleware <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-saga'</span><br><span class="hljs-keyword">import</span> { put, takeEvery, call } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-saga/effects'</span><br><br><span class="hljs-keyword">const</span> saga = createSagaMiddleware()<br><br><span class="hljs-keyword">const</span> initalState = { <span class="hljs-comment">/*初始state对象*/</span> }<br><span class="hljs-keyword">const</span> reduer1 = <span class="hljs-function">(<span class="hljs-params">state , action</span>) =&gt;</span> {<br>  <span class="hljs-keyword">switch</span> (action.type) {<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">'ADD_TODO'</span> :<br>      <span class="hljs-keyword">return</span> {<br>        <span class="hljs-comment">/* 修改后的新的state */</span><br>      }<br>    <span class="hljs-attr">default</span>:<br>      <span class="hljs-keyword">return</span> state<br>  }<br>}<br><span class="hljs-keyword">const</span> reduer2 = <span class="hljs-function">(<span class="hljs-params">state , action</span>) =&gt;</span> {<br>  <span class="hljs-keyword">switch</span> (action.type) {<br>    <span class="hljs-keyword">case</span> <span class="hljs-string">'Visibility'</span> :<br>      <span class="hljs-keyword">return</span> {<br>        <span class="hljs-comment">/* 修改后的新的state */</span><br>      }<br>    <span class="hljs-attr">default</span>:<br>      <span class="hljs-keyword">return</span> state<br>  }<br>}<br><span class="hljs-comment">// 可以把不同的reduer合并为一个reduer</span><br><span class="hljs-keyword">const</span> reduer = combineReducers({reduer1, reduer2})<br><br><span class="hljs-comment">// 创建store</span><br><span class="hljs-keyword">const</span> store = createStore(reducer, applyMiddleware(saga)<br>                     <br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> *<span class="hljs-title">getUserInfo</span>(<span class="hljs-params"></span>) </span>{<br>  <span class="hljs-keyword">try</span> {<br>    <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">yield</span> axios.get(url)<br>    <span class="hljs-keyword">yield</span> put({<span class="hljs-attr">type</span>: <span class="hljs-string">'XXX'</span>, <span class="hljs-attr">user</span>: res.data})<br>  } <span class="hljs-keyword">catch</span> {<br>  <br>  }<br>}<br><br><span class="hljs-function"><span class="hljs-keyword">function</span> *<span class="hljs-title">rootSaga</span>(<span class="hljs-params"></span>) </span>{<br>  <span class="hljs-keyword">yield</span> takeEvery(<span class="hljs-string">'get-user-info'</span>, getUserInfo)<br>}<br><br>saga.run(rootSaga)<br>                          <br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><h4 id="什么是redux-saga"><a href="#什么是redux-saga" class="headerlink" title="什么是redux-saga"></a>什么是redux-saga</h4><p>redux中用来处理异步的中间件插件,用于管理应用程序副作用.</p>
+<p>使用了es6的Generator</p>
+<h4 id="put-call的区别"><a href="#put-call的区别" class="headerlink" title="put,call的区别"></a>put,call的区别</h4><p><code>put</code>是根据类型调用reduer里面的修改.</p>
+<p><code>call</code>是调用store里面的函数</p>
 
             </div>
             <hr>
@@ -254,11 +271,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/SQL/">SQL</a>
-                    
-                      <a class="hover-with-bg" href="/tags/ORM/">ORM</a>
-                    
-                      <a class="hover-with-bg" href="/tags/sqlite3/">sqlite3</a>
+                      <a class="hover-with-bg" href="/tags/react/">react</a>
                     
                   </div>
                 
@@ -275,9 +288,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/05/13/redux%E5%AD%A6%E4%B9%A0/">
+                      <a href="/2021/05/16/webpack%E6%89%93%E5%8C%85ts%E4%BB%A3%E7%A0%81/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">redux学习</span>
+                        <span class="hidden-mobile">webpack打包ts代码</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -285,8 +298,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/05/08/sqlite3%E5%88%A0%E9%99%A4%E5%85%B3%E8%81%94%E7%9A%84%E5%88%97%E8%A1%A8%E8%A1%8C/">
-                        <span class="hidden-mobile">sqlite3删除关联的列表行</span>
+                      <a href="/2021/05/08/%E4%BD%BF%E7%94%A8chrome%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E6%B5%8B%E8%AF%95sequlize%E8%AF%AD%E5%8F%A5/">
+                        <span class="hidden-mobile">使用chrome开发工具测试sequlize语句</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
